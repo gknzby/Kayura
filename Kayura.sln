@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36105.17
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kayura.Db", "Kayura.Db\Kayura.Db.csproj", "{4A45E2A9-D25D-495B-9A11-2FA62FB8850A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kayura.UIX", "Kayura.UIX\Kayura.UIX.csproj", "{848F3908-0427-494C-9C18-685A80F3BAE3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kayura.Tako", "Kayura.Tako\Kayura.Tako.csproj", "{99C66A02-6D48-47D1-A02B-A4F6B3561A35}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kayura.Wako", "Kayura.Wako\Kayura.Wako\Kayura.Wako.csproj", "{14BA0D5E-F6F9-4CC1-9913-A2AA7893C874}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kayura.Wako.Client", "Kayura.Wako\Kayura.Wako.Client\Kayura.Wako.Client.csproj", "{181E0245-C6D5-42C2-843B-C85A71834EA1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4A45E2A9-D25D-495B-9A11-2FA62FB8850A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A45E2A9-D25D-495B-9A11-2FA62FB8850A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A45E2A9-D25D-495B-9A11-2FA62FB8850A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A45E2A9-D25D-495B-9A11-2FA62FB8850A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{848F3908-0427-494C-9C18-685A80F3BAE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{848F3908-0427-494C-9C18-685A80F3BAE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{848F3908-0427-494C-9C18-685A80F3BAE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{848F3908-0427-494C-9C18-685A80F3BAE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99C66A02-6D48-47D1-A02B-A4F6B3561A35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99C66A02-6D48-47D1-A02B-A4F6B3561A35}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99C66A02-6D48-47D1-A02B-A4F6B3561A35}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{99C66A02-6D48-47D1-A02B-A4F6B3561A35}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99C66A02-6D48-47D1-A02B-A4F6B3561A35}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14BA0D5E-F6F9-4CC1-9913-A2AA7893C874}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14BA0D5E-F6F9-4CC1-9913-A2AA7893C874}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14BA0D5E-F6F9-4CC1-9913-A2AA7893C874}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14BA0D5E-F6F9-4CC1-9913-A2AA7893C874}.Release|Any CPU.Build.0 = Release|Any CPU
+		{181E0245-C6D5-42C2-843B-C85A71834EA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{181E0245-C6D5-42C2-843B-C85A71834EA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{181E0245-C6D5-42C2-843B-C85A71834EA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{181E0245-C6D5-42C2-843B-C85A71834EA1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F27DB128-AF2D-40E4-B577-64BF8E010268}
+	EndGlobalSection
+EndGlobal
