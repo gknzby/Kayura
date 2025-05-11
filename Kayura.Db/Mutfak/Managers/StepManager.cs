@@ -1,4 +1,5 @@
 using Kayura.Db.Mutfak.Models;
+using Microsoft.Extensions.Logging;
 
 namespace Kayura.Db.Mutfak.Managers;
 
@@ -7,7 +8,7 @@ namespace Kayura.Db.Mutfak.Managers;
 /// </summary>
 public class StepManager : MutfakManager<Step>
 {
-  public StepManager(LiteDb<Step> repository) : base(repository)
+  public StepManager(LiteDb<Step> repository, ILogger<StepManager>? logger = null) : base(repository, logger)
   {
   }
 

@@ -1,6 +1,7 @@
 using Kayura.Db.Mutfak.Models;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 
 namespace Kayura.Db.Mutfak.Managers;
@@ -10,7 +11,7 @@ namespace Kayura.Db.Mutfak.Managers;
 /// </summary>
 public class MutfakManagerFactory : IDisposable
 {
-    private readonly Dictionary<Type, object> _managers = new();
+    private readonly ConcurrentDictionary<Type, object> _managers = new(); // Use ConcurrentDictionary for thread safety
     private readonly EntityManagerFactory _entityManagerFactory;
     private readonly ILoggerFactory? _loggerFactory;
     private bool _disposed;
@@ -23,19 +24,12 @@ public class MutfakManagerFactory : IDisposable
 
     protected ILogger<T>? CreateLogger<T>() => _loggerFactory?.CreateLogger<T>();
 
-    // Generic method to get or create managers
+    // Generic method to get or create managers (thread-safe)
     private TManager GetOrCreateManager<TManager, TEntity>(Func<TManager> factory) 
         where TManager : class 
         where TEntity : class
     {
-        if (_managers.TryGetValue(typeof(TManager), out var existing))
-        {
-            return (TManager)existing;
-        }
-
-        var manager = factory();
-        _managers[typeof(TManager)] = manager;
-        return manager;
+        return (TManager)_managers.GetOrAdd(typeof(TManager), _ => factory());
     }
 
     /// <summary>
@@ -45,7 +39,8 @@ public class MutfakManagerFactory : IDisposable
     {
         return GetOrCreateManager<RestaurantManager, Restaurant>(() => {
             var repository = _entityManagerFactory.GetRepository<Restaurant>();
-            return new RestaurantManager(repository);
+            var logger = CreateLogger<RestaurantManager>();
+            return new RestaurantManager(repository, logger);
         });
     }
 
@@ -56,7 +51,8 @@ public class MutfakManagerFactory : IDisposable
     {
         return GetOrCreateManager<IngredientManager, Ingredient>(() => {
             var repository = _entityManagerFactory.GetRepository<Ingredient>();
-            return new IngredientManager(repository);
+            var logger = CreateLogger<IngredientManager>();
+            return new IngredientManager(repository, logger);
         });
     }
 
@@ -67,7 +63,8 @@ public class MutfakManagerFactory : IDisposable
     {
         return GetOrCreateManager<FoodManager, Food>(() => {
             var repository = _entityManagerFactory.GetRepository<Food>();
-            return new FoodManager(repository);
+            var logger = CreateLogger<FoodManager>();
+            return new FoodManager(repository, logger);
         });
     }
 
@@ -79,7 +76,8 @@ public class MutfakManagerFactory : IDisposable
         return GetOrCreateManager<PantryItemManager, PantryItem>(() => {
             var repository = _entityManagerFactory.GetRepository<PantryItem>();
             var productManager = GetProductManager();
-            return new PantryItemManager(repository, productManager);
+            var logger = CreateLogger<PantryItemManager>();
+            return new PantryItemManager(repository, productManager, logger);
         });
     }
 
@@ -92,7 +90,8 @@ public class MutfakManagerFactory : IDisposable
             var repository = _entityManagerFactory.GetRepository<Product>();
             var ingredientManager = GetIngredientManager();
             var ratingManager = GetRatingManager();
-            return new ProductManager(repository, ingredientManager, ratingManager);
+            var logger = CreateLogger<ProductManager>();
+            return new ProductManager(repository, ingredientManager, ratingManager, logger);
         });
     }
 
@@ -103,7 +102,8 @@ public class MutfakManagerFactory : IDisposable
     {
         return GetOrCreateManager<RatingManager, Rating>(() => {
             var repository = _entityManagerFactory.GetRepository<Rating>();
-            return new RatingManager(repository);
+            var logger = CreateLogger<RatingManager>();
+            return new RatingManager(repository, logger);
         });
     }
 
@@ -115,7 +115,8 @@ public class MutfakManagerFactory : IDisposable
         return GetOrCreateManager<RecipeManager, Recipe>(() => {
             var repository = _entityManagerFactory.GetRepository<Recipe>();
             var foodManager = GetFoodManager();
-            return new RecipeManager(repository, foodManager);
+            var logger = CreateLogger<RecipeManager>();
+            return new RecipeManager(repository, foodManager, logger);
         });
     }
 
@@ -128,7 +129,8 @@ public class MutfakManagerFactory : IDisposable
             var repository = _entityManagerFactory.GetRepository<RecipeStep>();
             var recipeManager = GetRecipeManager();
             var stepManager = GetStepManager();
-            return new RecipeStepManager(repository, recipeManager, stepManager);
+            var logger = CreateLogger<RecipeStepManager>();
+            return new RecipeStepManager(repository, recipeManager, stepManager, logger);
         });
     }
 
@@ -141,7 +143,8 @@ public class MutfakManagerFactory : IDisposable
             var repository = _entityManagerFactory.GetRepository<RecipeHistory>();
             var recipeManager = GetRecipeManager();
             var ratingManager = GetRatingManager();
-            return new RecipeHistoryManager(repository, recipeManager, ratingManager);
+            var logger = CreateLogger<RecipeHistoryManager>();
+            return new RecipeHistoryManager(repository, recipeManager, ratingManager, logger);
         });
     }
 
@@ -152,7 +155,8 @@ public class MutfakManagerFactory : IDisposable
     {
         return GetOrCreateManager<StepManager, Step>(() => {
             var repository = _entityManagerFactory.GetRepository<Step>();
-            return new StepManager(repository);
+            var logger = CreateLogger<StepManager>();
+            return new StepManager(repository, logger);
         });
     }
 
@@ -165,7 +169,8 @@ public class MutfakManagerFactory : IDisposable
             var repository = _entityManagerFactory.GetRepository<StepIngredient>();
             var stepManager = GetStepManager();
             var ingredientManager = GetIngredientManager();
-            return new StepIngredientManager(repository, stepManager, ingredientManager);
+            var logger = CreateLogger<StepIngredientManager>();
+            return new StepIngredientManager(repository, stepManager, ingredientManager, logger);
         });
     }
 
@@ -179,7 +184,8 @@ public class MutfakManagerFactory : IDisposable
             var recipeManager = GetRecipeManager();
             var restaurantManager = GetRestaurantManager();
             var ratingManager = GetRatingManager();
-            return new OrderManager(repository, recipeManager, restaurantManager, ratingManager);
+            var logger = CreateLogger<OrderManager>();
+            return new OrderManager(repository, recipeManager, restaurantManager, ratingManager, logger);
         });
     }
 
@@ -190,7 +196,8 @@ public class MutfakManagerFactory : IDisposable
     {
         return GetOrCreateManager<ToolManager, Tool>(() => {
             var repository = _entityManagerFactory.GetRepository<Tool>();
-            return new ToolManager(repository);
+            var logger = CreateLogger<ToolManager>();
+            return new ToolManager(repository, logger);
         });
     }
 
@@ -201,8 +208,17 @@ public class MutfakManagerFactory : IDisposable
         {
             if (disposing)
             {
-                // Nothing to dispose in this class, but could be needed in the future
+                // Dispose managed resources.
+                foreach (var managerInstance in _managers.Values)
+                {
+                    if (managerInstance is IDisposable disposableManager)
+                    {
+                        disposableManager.Dispose();
+                    }
+                }
+                _managers.Clear(); // Clear the dictionary after disposing all instances.
             }
+            // Future: Dispose unmanaged resources here if any are added.
             _disposed = true;
         }
     }

@@ -1,4 +1,5 @@
 using Kayura.Db.Mutfak.Models;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -14,10 +15,11 @@ public class RecipeHistoryManager : MutfakManager<RecipeHistory>
   private readonly RatingManager _ratingManager;
 
   public RecipeHistoryManager(LiteDb<RecipeHistory> repository, RecipeManager recipeManager,
-      RatingManager ratingManager) : base(repository)
+      RatingManager ratingManager, ILogger<RecipeHistoryManager>? logger = null) 
+      : base(repository, logger)
   {
-    _recipeManager = recipeManager;
-    _ratingManager = ratingManager;
+    _recipeManager = recipeManager ?? throw new ArgumentNullException(nameof(recipeManager));
+    _ratingManager = ratingManager ?? throw new ArgumentNullException(nameof(ratingManager));
   }
 
   /// <summary>

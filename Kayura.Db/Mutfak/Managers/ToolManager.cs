@@ -1,4 +1,5 @@
 using Kayura.Db.Mutfak.Models;
+using Microsoft.Extensions.Logging;
 
 namespace Kayura.Db.Mutfak.Managers;
 
@@ -7,7 +8,7 @@ namespace Kayura.Db.Mutfak.Managers;
 /// </summary>
 public class ToolManager : MutfakManager<Tool>
 {
-  public ToolManager(LiteDb<Tool> repository) : base(repository)
+  public ToolManager(LiteDb<Tool> repository, ILogger<ToolManager>? logger = null) : base(repository, logger)
   {
   }
 

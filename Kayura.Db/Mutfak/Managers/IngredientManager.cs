@@ -1,4 +1,5 @@
 using Kayura.Db.Mutfak.Models;
+using Microsoft.Extensions.Logging; // Added for ILogger
 using System; // Added for ArgumentException
 
 namespace Kayura.Db.Mutfak.Managers;
@@ -8,7 +9,7 @@ namespace Kayura.Db.Mutfak.Managers;
 /// </summary>
 public class IngredientManager : MutfakManager<Ingredient>
 {
-  public IngredientManager(LiteDb<Ingredient> repository) : base(repository)
+  public IngredientManager(LiteDb<Ingredient> repository, ILogger<IngredientManager>? logger = null) : base(repository, logger)
   {
   }
 

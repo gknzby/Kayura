@@ -13,6 +13,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kayura.Wako", "Kayura.Wako\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kayura.Wako.Client", "Kayura.Wako\Kayura.Wako.Client\Kayura.Wako.Client.csproj", "{181E0245-C6D5-42C2-843B-C85A71834EA1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mutfak", "Mutfak", "{4DB2955B-8E8F-C12E-B251-124C1E384044}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kayura.Mutfak", "Mutfak\Kayura.Mutfak\Kayura.Mutfak.csproj", "{E5DFC5D2-A74D-449B-A688-69BD00A379C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kayura.Mutfak.WebApp", "Mutfak\Kayura.Mutfak.WebApp\Kayura.Mutfak.WebApp\Kayura.Mutfak.WebApp.csproj", "{7DE22E41-E5EE-BC02-430A-B85C0C3447DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kayura.Mutfak.WebApp.Client", "Mutfak\Kayura.Mutfak.WebApp\Kayura.Mutfak.WebApp.Client\Kayura.Mutfak.WebApp.Client.csproj", "{05B31258-A921-F75F-36B0-94C1DA4D9636}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kayura.AppHost", "Kayura.AppHost\Kayura.AppHost.csproj", "{111A74BA-4166-4E43-8BB8-B3C3350F6B61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kayura.ServiceDefaults", "Kayura.ServiceDefaults\Kayura.ServiceDefaults.csproj", "{F9F38B99-0A8A-1EEC-0AFA-6147A1138B9D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,9 +52,35 @@ Global
 		{181E0245-C6D5-42C2-843B-C85A71834EA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{181E0245-C6D5-42C2-843B-C85A71834EA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{181E0245-C6D5-42C2-843B-C85A71834EA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5DFC5D2-A74D-449B-A688-69BD00A379C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5DFC5D2-A74D-449B-A688-69BD00A379C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5DFC5D2-A74D-449B-A688-69BD00A379C7}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{E5DFC5D2-A74D-449B-A688-69BD00A379C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5DFC5D2-A74D-449B-A688-69BD00A379C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DE22E41-E5EE-BC02-430A-B85C0C3447DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DE22E41-E5EE-BC02-430A-B85C0C3447DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DE22E41-E5EE-BC02-430A-B85C0C3447DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DE22E41-E5EE-BC02-430A-B85C0C3447DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05B31258-A921-F75F-36B0-94C1DA4D9636}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05B31258-A921-F75F-36B0-94C1DA4D9636}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05B31258-A921-F75F-36B0-94C1DA4D9636}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05B31258-A921-F75F-36B0-94C1DA4D9636}.Release|Any CPU.Build.0 = Release|Any CPU
+		{111A74BA-4166-4E43-8BB8-B3C3350F6B61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{111A74BA-4166-4E43-8BB8-B3C3350F6B61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{111A74BA-4166-4E43-8BB8-B3C3350F6B61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{111A74BA-4166-4E43-8BB8-B3C3350F6B61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9F38B99-0A8A-1EEC-0AFA-6147A1138B9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9F38B99-0A8A-1EEC-0AFA-6147A1138B9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9F38B99-0A8A-1EEC-0AFA-6147A1138B9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9F38B99-0A8A-1EEC-0AFA-6147A1138B9D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E5DFC5D2-A74D-449B-A688-69BD00A379C7} = {4DB2955B-8E8F-C12E-B251-124C1E384044}
+		{7DE22E41-E5EE-BC02-430A-B85C0C3447DC} = {4DB2955B-8E8F-C12E-B251-124C1E384044}
+		{05B31258-A921-F75F-36B0-94C1DA4D9636} = {4DB2955B-8E8F-C12E-B251-124C1E384044}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F27DB128-AF2D-40E4-B577-64BF8E010268}

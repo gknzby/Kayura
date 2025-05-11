@@ -1,4 +1,5 @@
 using Kayura.Db.Mutfak.Models;
+using Microsoft.Extensions.Logging;
 
 namespace Kayura.Db.Mutfak.Managers;
 
@@ -12,11 +13,12 @@ public class OrderManager : MutfakManager<Order>
   private readonly RatingManager _ratingManager;
 
   public OrderManager(LiteDb<Order> repository, RecipeManager recipeManager,
-      RestaurantManager restaurantManager, RatingManager ratingManager) : base(repository)
+      RestaurantManager restaurantManager, RatingManager ratingManager, ILogger<OrderManager>? logger = null) 
+      : base(repository, logger)
   {
-    _recipeManager = recipeManager;
-    _restaurantManager = restaurantManager;
-    _ratingManager = ratingManager;
+    _recipeManager = recipeManager ?? throw new ArgumentNullException(nameof(recipeManager));
+    _restaurantManager = restaurantManager ?? throw new ArgumentNullException(nameof(restaurantManager));
+    _ratingManager = ratingManager ?? throw new ArgumentNullException(nameof(ratingManager));
   }
 
   /// <summary>

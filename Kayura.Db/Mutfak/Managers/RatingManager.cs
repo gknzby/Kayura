@@ -1,4 +1,6 @@
 using Kayura.Db.Mutfak.Models;
+using Microsoft.Extensions.Logging; // Added for ILogger
+using System; // Added for DateTime
 
 namespace Kayura.Db.Mutfak.Managers;
 
@@ -7,7 +9,7 @@ namespace Kayura.Db.Mutfak.Managers;
 /// </summary>
 public class RatingManager : MutfakManager<Rating>
 {
-  public RatingManager(LiteDb<Rating> repository) : base(repository)
+  public RatingManager(LiteDb<Rating> repository, ILogger<RatingManager>? logger = null) : base(repository, logger)
   {
   }
 

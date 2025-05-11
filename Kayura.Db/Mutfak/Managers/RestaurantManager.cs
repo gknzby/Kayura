@@ -1,4 +1,5 @@
 using Kayura.Db.Mutfak.Models;
+using Microsoft.Extensions.Logging;
 
 namespace Kayura.Db.Mutfak.Managers;
 
@@ -7,7 +8,7 @@ namespace Kayura.Db.Mutfak.Managers;
 /// </summary>
 public class RestaurantManager : MutfakManager<Restaurant>
 {
-  public RestaurantManager(LiteDb<Restaurant> repository) : base(repository)
+  public RestaurantManager(LiteDb<Restaurant> repository, ILogger<RestaurantManager>? logger = null) : base(repository, logger)
   {
   }
 

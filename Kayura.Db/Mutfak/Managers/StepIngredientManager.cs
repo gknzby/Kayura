@@ -1,4 +1,6 @@
 using Kayura.Db.Mutfak.Models;
+using Microsoft.Extensions.Logging; // Added for ILogger
+using System; // Added for ArgumentNullException
 
 namespace Kayura.Db.Mutfak.Managers;
 
@@ -11,10 +13,11 @@ public class StepIngredientManager : MutfakManager<StepIngredient>
   private readonly IngredientManager _ingredientManager;
 
   public StepIngredientManager(LiteDb<StepIngredient> repository, StepManager stepManager,
-      IngredientManager ingredientManager) : base(repository)
+      IngredientManager ingredientManager, ILogger<StepIngredientManager>? logger = null) 
+      : base(repository, logger)
   {
-    _stepManager = stepManager;
-    _ingredientManager = ingredientManager;
+    _stepManager = stepManager ?? throw new ArgumentNullException(nameof(stepManager));
+    _ingredientManager = ingredientManager ?? throw new ArgumentNullException(nameof(ingredientManager));
   }
 
   /// <summary>
