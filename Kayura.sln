@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kayura.AppHost", "Kayura.Ap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kayura.ServiceDefaults", "Kayura.ServiceDefaults\Kayura.ServiceDefaults.csproj", "{F9F38B99-0A8A-1EEC-0AFA-6147A1138B9D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kayura.Mutfak.UIX", "Mutfak\Kayura.Mutfak.UIX\Kayura.Mutfak.UIX.csproj", "{EEC5BECC-61E2-4428-AEA4-2B89C3C4FF3A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +56,10 @@ Global
 		{F9F38B99-0A8A-1EEC-0AFA-6147A1138B9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9F38B99-0A8A-1EEC-0AFA-6147A1138B9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9F38B99-0A8A-1EEC-0AFA-6147A1138B9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEC5BECC-61E2-4428-AEA4-2B89C3C4FF3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEC5BECC-61E2-4428-AEA4-2B89C3C4FF3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEC5BECC-61E2-4428-AEA4-2B89C3C4FF3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEC5BECC-61E2-4428-AEA4-2B89C3C4FF3A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 		{E5DFC5D2-A74D-449B-A688-69BD00A379C7} = {4DB2955B-8E8F-C12E-B251-124C1E384044}
 		{7DE22E41-E5EE-BC02-430A-B85C0C3447DC} = {4DB2955B-8E8F-C12E-B251-124C1E384044}
 		{05B31258-A921-F75F-36B0-94C1DA4D9636} = {4DB2955B-8E8F-C12E-B251-124C1E384044}
+		{EEC5BECC-61E2-4428-AEA4-2B89C3C4FF3A} = {4DB2955B-8E8F-C12E-B251-124C1E384044}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F27DB128-AF2D-40E4-B577-64BF8E010268}
