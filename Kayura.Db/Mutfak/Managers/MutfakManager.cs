@@ -1,4 +1,3 @@
-using System;
 using Microsoft.Extensions.Logging;
 
 namespace Kayura.Db.Mutfak.Managers;
@@ -7,57 +6,56 @@ namespace Kayura.Db.Mutfak.Managers;
 /// Base manager class for Mutfak domain entities
 /// </summary>
 /// <typeparam name="T">Entity type</typeparam>
-public abstract class MutfakManager<T> : EntityManager<T> where T : class
+public abstract class MutfakManager<T>(LiteDb<T> repository, ILogger<MutfakManager<T>>? logger = null) : EntityManager<T>(repository, logger) where T : class
 {
-    protected MutfakManager(LiteDb<T> repository, ILogger<MutfakManager<T>>? logger = null) 
-        : base(repository, logger)
+
+  /// <summary>
+  /// Creates a new instance of the entity
+  /// </summary>
+  /// <returns>A new entity instance</returns>
+  public abstract T Create();
+
+  /// <summary>
+  /// Validates an entity before saving
+  /// </summary>
+  /// <param name="entity">The entity to validate</param>
+  /// <returns>True if valid; otherwise false</returns>
+  protected virtual bool Validate(T entity)
+  {
+    if (entity == null)
     {
+      LogError("Cannot validate null entity");
+      return false;
     }
 
-    /// <summary>
-    /// Creates a new instance of the entity
-    /// </summary>
-    /// <returns>A new entity instance</returns>
-    public abstract T Create();
+    return true;
+  }
 
-    /// <summary>
-    /// Validates an entity before saving
-    /// </summary>
-    /// <param name="entity">The entity to validate</param>
-    /// <returns>True if valid; otherwise false</returns>
-    protected virtual bool Validate(T entity)
+  /// <summary>
+  /// Adds an entity after validation
+  /// </summary>
+  /// <param name="entity">The entity to add</param>
+  public override async Task AddAsync(T entity)
+  {
+    if (!Validate(entity))
     {
-        if (entity == null)
-        {
-            LogError("Cannot validate null entity");
-            return false;
-        }
-        return true;
+      throw new InvalidOperationException($"Entity of type {typeof(T).Name} failed validation");
     }
 
-    /// <summary>
-    /// Adds an entity after validation
-    /// </summary>
-    /// <param name="entity">The entity to add</param>
-    public override async Task AddAsync(T entity)
+    await base.AddAsync(entity);
+  }
+
+  /// <summary>
+  /// Updates an entity after validation
+  /// </summary>
+  /// <param name="entity">The entity to update</param>
+  public override async Task UpdateAsync(T entity)
+  {
+    if (!Validate(entity))
     {
-        if (!Validate(entity))
-        {
-            throw new InvalidOperationException($"Entity of type {typeof(T).Name} failed validation");
-        }
-        await base.AddAsync(entity);
+      throw new InvalidOperationException($"Entity of type {typeof(T).Name} failed validation");
     }
 
-    /// <summary>
-    /// Updates an entity after validation
-    /// </summary>
-    /// <param name="entity">The entity to update</param>
-    public override async Task UpdateAsync(T entity)
-    {
-        if (!Validate(entity))
-        {
-            throw new InvalidOperationException($"Entity of type {typeof(T).Name} failed validation");
-        }
-        await base.UpdateAsync(entity);
-    }
+    await base.UpdateAsync(entity);
+  }
 }

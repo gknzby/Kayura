@@ -16,6 +16,6 @@ public class Ingredient
   [Required, MaxLength(100)]
   public required string Name { get; set; }
 
-  public virtual ICollection<StepIngredient> StepIngredients { get; set; } = new List<StepIngredient>();
-  public virtual ICollection<Product> Products { get; set; } = new List<Product>();
+  public virtual ICollection<StepIngredient> StepIngredients { get; set; } = [];
+  public virtual ICollection<Product> Products { get; set; } = [];
 }

@@ -16,5 +16,5 @@ public class Restaurant
   [Required, MaxLength(100)]
   public required string Name { get; set; }
 
-  public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
+  public virtual ICollection<Order> Orders { get; set; } = [];
 }

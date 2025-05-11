@@ -16,11 +16,11 @@ public class StepTool
   public required int StepId { get; set; }
 
   [Required]
-  public required virtual Step Step { get; set; }
+  public virtual required Step Step { get; set; }
 
   [ForeignKey("Tool")]
   public required int ToolId { get; set; }
 
   [Required]
-  public required virtual Tool Tool { get; set; }
+  public virtual required Tool Tool { get; set; }
 }

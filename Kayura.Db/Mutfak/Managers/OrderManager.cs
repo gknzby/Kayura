@@ -1,4 +1,5 @@
 using Kayura.Db.Mutfak.Models;
+
 using Microsoft.Extensions.Logging;
 
 namespace Kayura.Db.Mutfak.Managers;
@@ -13,7 +14,7 @@ public class OrderManager : MutfakManager<Order>
   private readonly RatingManager _ratingManager;
 
   public OrderManager(LiteDb<Order> repository, RecipeManager recipeManager,
-      RestaurantManager restaurantManager, RatingManager ratingManager, ILogger<OrderManager>? logger = null) 
+      RestaurantManager restaurantManager, RatingManager ratingManager, ILogger<OrderManager>? logger = null)
       : base(repository, logger)
   {
     _recipeManager = recipeManager ?? throw new ArgumentNullException(nameof(recipeManager));
@@ -24,10 +25,7 @@ public class OrderManager : MutfakManager<Order>
   /// <summary>
   /// Not recommended - use Create(Recipe, Restaurant, Rating) instead
   /// </summary>
-  public override Order Create()
-  {
-    throw new InvalidOperationException("Order must be created with Recipe and Restaurant references");
-  }
+  public override Order Create() => throw new InvalidOperationException("Order must be created with Recipe and Restaurant references");
 
   /// <summary>
   /// Creates a new Order instance with references to Recipe and Restaurant

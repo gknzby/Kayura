@@ -16,5 +16,5 @@ public class Tool
   [Required, MaxLength(100)]
   public required string Name { get; set; }
 
-  public virtual ICollection<StepTool> StepTools { get; set; } = new List<StepTool>();
+  public virtual ICollection<StepTool> StepTools { get; set; } = [];
 }

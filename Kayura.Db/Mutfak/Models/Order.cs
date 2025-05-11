@@ -16,13 +16,13 @@ public class Order
   public required int RecipeId { get; set; }
 
   [Required]
-  public required virtual Recipe Recipe { get; set; }
+  public virtual required Recipe Recipe { get; set; }
 
   [ForeignKey("Restaurant")]
   public required int RestaurantId { get; set; }
 
   [Required]
-  public required virtual Restaurant Restaurant { get; set; }
+  public virtual required Restaurant Restaurant { get; set; }
 
   public decimal Price { get; set; }
 

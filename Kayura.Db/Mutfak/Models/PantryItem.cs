@@ -1,4 +1,3 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -16,7 +15,7 @@ public class PantryItem
   [ForeignKey("Product")]
   public int ProductId { get; set; }
   [Required]
-  public required virtual Product Product { get; set; }
+  public virtual required Product Product { get; set; }
 
   public decimal Quantity { get; set; }
   public DateTime PurchaseDate { get; set; }

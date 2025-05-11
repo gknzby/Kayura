@@ -1,0 +1,94 @@
+# Kayura.Mutfak.UIX : Project
+- Models : Folder
+  - FoodCore : File
+    - FoodFilter
+    - FoodDto
+  - ProductCore : File
+    - ProductFilter
+    - ProductDto
+  - RecipeCore : File
+    - RecipeFilter
+    - RecipeDto
+  - PantryItemCore : File
+    - PantryItemFilter
+    - PantryItemDto
+  - IngredientCore : File
+    - IngredientFilter
+    - IngredientDto
+  - ToolCore : File
+    - ToolFilter
+    - ToolDto
+  - RatingCore : File
+    - RatingFilter
+    - RatingDto
+  - RestaurantCore : File
+    - RestaurantFilter
+    - RestaurantDto
+  - OrderCore : File
+    - OrderFilter
+    - OrderDto
+  - StepCore : File
+    - StepFilter
+    - StepDto
+  - StepToolCore : File
+    - StepToolFilter
+    - StepToolDto
+  - StepIngredientCore : File
+    - StepIngredientFilter
+    - StepIngredientDto
+  - SubRecipeCore : File
+    - SubRecipeFilter
+    - SubRecipeDto
+  - RecipeHistoryCore : File
+    - RecipeHistoryFilter
+    - RecipeHistoryDto
+  - EntityCoreComponents : File
+    - EntityListPage<TBlock, TForm, TFilter>
+    - EntityBlock<T>
+    - EntityForm<T>
+    - EntityDetail<T>
+    - EntityRelatedList<TParent, TChild>
+
+- ViewModels : Folder
+  - FoodViewModel : File
+  - ProductViewModel : File
+  - RecipeViewModel : File
+  - PantryItemViewModel : File
+  - IngredientViewModel : File
+  - ToolViewModel : File
+  - RatingViewModel : File
+  - RestaurantViewModel : File
+  - OrderViewModel : File
+  - StepViewModel : File
+  - StepToolViewModel : File
+  - StepIngredientViewModel : File
+  - SubRecipeViewModel : File
+  - RecipeHistoryViewModel : File
+  - EntityViewModel<T, TFilter> : File
+
+-Views
+  - Component : Folder
+    - EntityList.razor : File
+    - EntityBlock.razor : File
+    - EntityForm.razor : File
+    - EntityDetail.razor : File
+    - EntityRelatedList.razor : File
+    - FilterPanel.razor : File
+    - DtoTable.razor : File
+    - DtoCard.razor : File
+
+  - Page : Folder
+    - FoodListPage.razor : File
+    - ProductListPage.razor : File
+    - RecipeListPage.razor : File
+    - PantryItemListPage.razor : File
+    - IngredientListPage.razor : File
+    - ToolListPage.razor : File
+    - RatingListPage.razor : File
+    - RestaurantListPage.razor : File
+    - OrderListPage.razor : File
+    - StepListPage.razor : File
+    - StepToolListPage.razor : File
+    - StepIngredientListPage.razor : File
+    - SubRecipeListPage.razor : File
+    - RecipeHistoryListPage.razor : File

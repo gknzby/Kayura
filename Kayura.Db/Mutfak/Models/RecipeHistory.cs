@@ -1,4 +1,3 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -13,7 +12,7 @@ public class RecipeHistory
   [ForeignKey("Recipe")]
   public int RecipeId { get; set; }
   [Required]
-  public required virtual Recipe Recipe { get; set; }
+  public virtual required Recipe Recipe { get; set; }
 
   [ForeignKey("Rating")]
   public int? RatingId { get; set; }

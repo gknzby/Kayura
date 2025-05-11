@@ -20,10 +20,7 @@ public class StepToolManager : MutfakManager<StepTool>
   /// <summary>
   /// Not recommended - use Create(Step, Tool) instead
   /// </summary>
-  public override StepTool Create()
-  {
-    throw new InvalidOperationException("StepTool must be created with Step and Tool references");
-  }
+  public override StepTool Create() => throw new InvalidOperationException("StepTool must be created with Step and Tool references");
 
   /// <summary>
   /// Creates a new StepTool instance with references to Step and Tool

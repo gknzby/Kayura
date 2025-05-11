@@ -9,18 +9,12 @@ public class SubRecipeManager : MutfakManager<SubRecipe>
 {
   private readonly RecipeManager _recipeManager;
 
-  public SubRecipeManager(LiteDb<SubRecipe> repository, RecipeManager recipeManager) : base(repository)
-  {
-    _recipeManager = recipeManager;
-  }
+  public SubRecipeManager(LiteDb<SubRecipe> repository, RecipeManager recipeManager) : base(repository) => _recipeManager = recipeManager;
 
   /// <summary>
   /// Not recommended - use Create(Recipe, Recipe) instead
   /// </summary>
-  public override SubRecipe Create()
-  {
-    throw new InvalidOperationException("SubRecipe must be created with references to two Recipe items");
-  }
+  public override SubRecipe Create() => throw new InvalidOperationException("SubRecipe must be created with references to two Recipe items");
 
   /// <summary>
   /// Creates a new SubRecipe instance with references to base and sub Recipe items

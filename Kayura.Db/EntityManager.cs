@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 
 namespace Kayura.Db;
 
@@ -10,118 +6,106 @@ namespace Kayura.Db;
 /// Base manager class for entity operations
 /// </summary>
 /// <typeparam name="T">Entity type</typeparam>
-public class EntityManager<T> where T : class
+public class EntityManager<T>(LiteDb<T> repository, ILogger<EntityManager<T>>? logger = null) where T : class
 {
-    protected readonly LiteDb<T> Repository;
-    protected readonly ILogger? Logger;
-  
-    public EntityManager(LiteDb<T> repository, ILogger<EntityManager<T>>? logger = null)
+  protected readonly LiteDb<T> Repository = repository ?? throw new ArgumentNullException(nameof(repository));
+  protected readonly ILogger? Logger = logger;
+
+  protected virtual void LogError(string message, Exception? ex = null) => Logger?.LogError(ex, "Error in method {MethodName}: {ErrorMessage}", nameof(LogError), message);
+
+  protected virtual void LogInfo(string message) => Logger?.LogInformation("Login Information {Message}", message);
+
+  public virtual async Task<IEnumerable<T>> GetAllAsync()
+  {
+    try
     {
-        Repository = repository ?? throw new ArgumentNullException(nameof(repository));
-        Logger = logger;
+      return await Repository.GetAllAsync();
+    }
+    catch (Exception ex)
+    {
+      LogError($"Error getting all entities of type {typeof(T).Name}", ex);
+      throw new DbOperationException($"Failed to retrieve {typeof(T).Name} entities", ex);
+    }
+  }
+
+  public virtual async Task<T?> GetByIdAsync(IObjectId id)
+  {
+    if (id == null)
+    {
+      LogError("GetByIdAsync called with null id");
+      throw new ArgumentNullException(nameof(id));
     }
 
-    protected virtual void LogError(string message, Exception? ex = null)
+    try
     {
-        Logger?.LogError(ex, message);
+      return await Repository.GetByIdAsync(id);
+    }
+    catch (Exception ex)
+    {
+      LogError($"Error getting entity of type {typeof(T).Name} by id", ex);
+      throw new DbOperationException($"Failed to retrieve {typeof(T).Name} by ID", ex);
+    }
+  }
+
+  public virtual async Task AddAsync(T entity)
+  {
+    if (entity == null)
+    {
+      LogError("AddAsync called with null entity");
+      throw new ArgumentNullException(nameof(entity));
     }
 
-    protected virtual void LogInfo(string message)
+    try
     {
-        Logger?.LogInformation(message);
+      await Repository.UpsertAsync(entity);
+      LogInfo($"Entity of type {typeof(T).Name} added successfully");
+    }
+    catch (Exception ex)
+    {
+      LogError($"Error adding entity of type {typeof(T).Name}", ex);
+      throw new DbOperationException($"Failed to add {typeof(T).Name}", ex);
+    }
+  }
+
+  public virtual async Task UpdateAsync(T entity)
+  {
+    if (entity == null)
+    {
+      LogError("UpdateAsync called with null entity");
+      throw new ArgumentNullException(nameof(entity));
     }
 
-    public virtual async Task<IEnumerable<T>> GetAllAsync()
+    try
     {
-        try
-        {
-            return await Repository.GetAllAsync();
-        }
-        catch (Exception ex)
-        {
-            LogError($"Error getting all entities of type {typeof(T).Name}", ex);
-            throw new DbOperationException($"Failed to retrieve {typeof(T).Name} entities", ex);
-        }
+      await Repository.UpsertAsync(entity);
+      LogInfo($"Entity of type {typeof(T).Name} updated successfully");
+    }
+    catch (Exception ex)
+    {
+      LogError($"Error updating entity of type {typeof(T).Name}", ex);
+      throw new DbOperationException($"Failed to update {typeof(T).Name}", ex);
+    }
+  }
+
+  public virtual async Task DeleteAsync(IObjectId id)
+  {
+    if (id == null)
+    {
+      LogError("DeleteAsync called with null id");
+      throw new ArgumentNullException(nameof(id));
     }
 
-    public virtual async Task<T?> GetByIdAsync(IObjectId id)
+    try
     {
-        if (id == null)
-        {
-            LogError("GetByIdAsync called with null id");
-            throw new ArgumentNullException(nameof(id));
-        }
-        
-        try
-        {
-            return await Repository.GetByIdAsync(id);
-        }
-        catch (Exception ex)
-        {
-            LogError($"Error getting entity of type {typeof(T).Name} by id", ex);
-            throw new DbOperationException($"Failed to retrieve {typeof(T).Name} by ID", ex);
-        }
+      await Repository.DeleteAsync(id);
+      LogInfo($"Entity of type {typeof(T).Name} deleted successfully");
     }
-
-    public virtual async Task AddAsync(T entity)
+    catch (Exception ex)
     {
-        if (entity == null)
-        {
-            LogError("AddAsync called with null entity");
-            throw new ArgumentNullException(nameof(entity));
-        }
-        
-        try
-        {
-            await Repository.UpsertAsync(entity);
-            LogInfo($"Entity of type {typeof(T).Name} added successfully");
-        }
-        catch (Exception ex)
-        {
-            LogError($"Error adding entity of type {typeof(T).Name}", ex);
-            throw new DbOperationException($"Failed to add {typeof(T).Name}", ex);
-        }
+      LogError($"Error deleting entity of type {typeof(T).Name}", ex);
+      throw new DbOperationException($"Failed to delete {typeof(T).Name}", ex);
     }
-
-    public virtual async Task UpdateAsync(T entity)
-    {
-        if (entity == null)
-        {
-            LogError("UpdateAsync called with null entity");
-            throw new ArgumentNullException(nameof(entity));
-        }
-        
-        try
-        {
-            await Repository.UpsertAsync(entity);
-            LogInfo($"Entity of type {typeof(T).Name} updated successfully");
-        }
-        catch (Exception ex)
-        {
-            LogError($"Error updating entity of type {typeof(T).Name}", ex);
-            throw new DbOperationException($"Failed to update {typeof(T).Name}", ex);
-        }
-    }
-
-    public virtual async Task DeleteAsync(IObjectId id)
-    {
-        if (id == null)
-        {
-            LogError("DeleteAsync called with null id");
-            throw new ArgumentNullException(nameof(id));
-        }
-        
-        try
-        {
-            await Repository.DeleteAsync(id);
-            LogInfo($"Entity of type {typeof(T).Name} deleted successfully");
-        }
-        catch (Exception ex)
-        {
-            LogError($"Error deleting entity of type {typeof(T).Name}", ex);
-            throw new DbOperationException($"Failed to delete {typeof(T).Name}", ex);
-        }
-    }
+  }
 }
 
 /// <summary>
@@ -129,7 +113,7 @@ public class EntityManager<T> where T : class
 /// </summary>
 public class DbOperationException : Exception
 {
-    public DbOperationException() { }
-    public DbOperationException(string message) : base(message) { }
-    public DbOperationException(string message, Exception inner) : base(message, inner) { }
+  public DbOperationException() { }
+  public DbOperationException(string message) : base(message) { }
+  public DbOperationException(string message, Exception inner) : base(message, inner) { }
 }

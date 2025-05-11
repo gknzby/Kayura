@@ -1,4 +1,5 @@
 using Kayura.Db.Mutfak.Models;
+
 using Microsoft.Extensions.Logging;
 
 namespace Kayura.Db.Mutfak.Managers;

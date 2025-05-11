@@ -1,42 +1,31 @@
 using Kayura.Db.Mutfak.Models;
+
 using Microsoft.Extensions.Logging; // Added for ILogger
-using System; // Added for ArgumentNullException
 
 namespace Kayura.Db.Mutfak.Managers;
 
 /// <summary>
 /// Manager for Product entities
 /// </summary>
-public class ProductManager : MutfakManager<Product>
+public class ProductManager(LiteDb<Product> repository, IngredientManager ingredientManager,
+    RatingManager ratingManager, ILogger<ProductManager>? logger = null) : MutfakManager<Product>(repository, logger)
 {
-  private readonly IngredientManager _ingredientManager;
-  private readonly RatingManager _ratingManager;
-
-  public ProductManager(LiteDb<Product> repository, IngredientManager ingredientManager,
-      RatingManager ratingManager, ILogger<ProductManager>? logger = null) 
-      : base(repository, logger)
-  {
-    _ingredientManager = ingredientManager ?? throw new ArgumentNullException(nameof(ingredientManager));
-    _ratingManager = ratingManager ?? throw new ArgumentNullException(nameof(ratingManager));
-  }
+  private readonly IngredientManager ingredientManager = ingredientManager ?? throw new ArgumentNullException(nameof(ingredientManager));
+  private readonly RatingManager ratingManager = ratingManager ?? throw new ArgumentNullException(nameof(ratingManager));
 
   /// <summary>
   /// Not recommended - use Create(Ingredient, Rating) instead
   /// </summary>
-  public override Product Create()
-  {
-    throw new InvalidOperationException("Product must be created with an Ingredient reference");
-  }
+  public override Product Create() => throw new InvalidOperationException("Product must be created with an Ingredient reference");
 
   /// <summary>
   /// Creates a new Product instance with references to Ingredient and optional Rating
   /// </summary>
   /// <param name="ingredient">Required Ingredient reference</param>
   /// <param name="rating">Optional Rating reference</param>
-  public Product Create(Ingredient ingredient, Rating? rating = null)
+  public static Product Create(Ingredient ingredient, Rating? rating = null)
   {
-    if (ingredient == null)
-      throw new ArgumentNullException(nameof(ingredient));
+    ArgumentNullException.ThrowIfNull(ingredient);
 
     var product = new Product
     {

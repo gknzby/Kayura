@@ -16,7 +16,7 @@ public class Product
   public required int IngredientId { get; set; }
 
   [Required]
-  public required virtual Ingredient Ingredient { get; set; }
+  public virtual required Ingredient Ingredient { get; set; }
 
   /// <summary>Name of the product.</summary>
   [Required, MaxLength(100)]
@@ -33,5 +33,5 @@ public class Product
   public int? RatingId { get; set; }
   public virtual Rating? Rating { get; set; }
 
-  public virtual ICollection<PantryItem> PantryItems { get; set; } = new List<PantryItem>();
+  public virtual ICollection<PantryItem> PantryItems { get; set; } = [];
 }

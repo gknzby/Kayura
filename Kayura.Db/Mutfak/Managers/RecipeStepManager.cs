@@ -1,6 +1,6 @@
 using Kayura.Db.Mutfak.Models;
+
 using Microsoft.Extensions.Logging; // Added for ILogger
-using System; // Added for ArgumentNullException
 
 namespace Kayura.Db.Mutfak.Managers;
 
@@ -13,7 +13,7 @@ public class RecipeStepManager : MutfakManager<RecipeStep>
   private readonly StepManager _stepManager;
 
   public RecipeStepManager(LiteDb<RecipeStep> repository, RecipeManager recipeManager,
-      StepManager stepManager, ILogger<RecipeStepManager>? logger = null) 
+      StepManager stepManager, ILogger<RecipeStepManager>? logger = null)
       : base(repository, logger)
   {
     _recipeManager = recipeManager ?? throw new ArgumentNullException(nameof(recipeManager));
@@ -23,10 +23,7 @@ public class RecipeStepManager : MutfakManager<RecipeStep>
   /// <summary>
   /// Not recommended - use Create(Recipe, Step) instead
   /// </summary>
-  public override RecipeStep Create()
-  {
-    throw new InvalidOperationException("RecipeStep must be created with Recipe and Step references");
-  }
+  public override RecipeStep Create() => throw new InvalidOperationException("RecipeStep must be created with Recipe and Step references");
 
   /// <summary>
   /// Creates a new RecipeStep instance with references to Recipe and Step

@@ -24,7 +24,7 @@ public class Step
   [MaxLength(500)]
   public string Note { get; set; } = string.Empty;
 
-  public virtual ICollection<RecipeStep> RecipeSteps { get; set; } = new List<RecipeStep>();
-  public virtual ICollection<StepTool> StepTools { get; set; } = new List<StepTool>();
-  public virtual ICollection<StepIngredient> StepIngredients { get; set; } = new List<StepIngredient>();
+  public virtual ICollection<RecipeStep> RecipeSteps { get; set; } = [];
+  public virtual ICollection<StepTool> StepTools { get; set; } = [];
+  public virtual ICollection<StepIngredient> StepIngredients { get; set; } = [];
 }

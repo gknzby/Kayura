@@ -1,44 +1,31 @@
 using Kayura.Db.Mutfak.Models;
+
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Kayura.Db.Mutfak.Managers;
 
 /// <summary>
 /// Manager for RecipeHistory entities
 /// </summary>
-public class RecipeHistoryManager : MutfakManager<RecipeHistory>
+public class RecipeHistoryManager(LiteDb<RecipeHistory> repository, RecipeManager recipeManager,
+    RatingManager ratingManager, ILogger<RecipeHistoryManager>? logger = null) : MutfakManager<RecipeHistory>(repository, logger)
 {
-  private readonly RecipeManager _recipeManager;
-  private readonly RatingManager _ratingManager;
-
-  public RecipeHistoryManager(LiteDb<RecipeHistory> repository, RecipeManager recipeManager,
-      RatingManager ratingManager, ILogger<RecipeHistoryManager>? logger = null) 
-      : base(repository, logger)
-  {
-    _recipeManager = recipeManager ?? throw new ArgumentNullException(nameof(recipeManager));
-    _ratingManager = ratingManager ?? throw new ArgumentNullException(nameof(ratingManager));
-  }
+  private readonly RecipeManager recipeManager = recipeManager ?? throw new ArgumentNullException(nameof(recipeManager));
+  private readonly RatingManager ratingManager = ratingManager ?? throw new ArgumentNullException(nameof(ratingManager));
 
   /// <summary>
   /// Not recommended - use Create(Recipe, Rating) instead
   /// </summary>
-  public override RecipeHistory Create()
-  {
-    throw new InvalidOperationException("RecipeHistory must be created with a Recipe reference");
-  }
+  public override RecipeHistory Create() => throw new InvalidOperationException("RecipeHistory must be created with a Recipe reference");
 
   /// <summary>
   /// Creates a new RecipeHistory instance with references to Recipe and optional Rating
   /// </summary>
   /// <param name="recipe">Required Recipe reference</param>
   /// <param name="rating">Optional Rating reference</param>
-  public RecipeHistory Create(Recipe recipe, Rating? rating = null)
+  public static RecipeHistory Create(Recipe recipe, Rating? rating = null)
   {
-    if (recipe == null)
-      throw new ArgumentNullException(nameof(recipe));
+    ArgumentNullException.ThrowIfNull(recipe);
 
     var history = new RecipeHistory
     {

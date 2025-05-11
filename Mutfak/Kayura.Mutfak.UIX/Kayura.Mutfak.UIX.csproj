@@ -6,21 +6,34 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="ViewModels\Component\**" />
+    <Compile Remove="ViewModels\Page\**" />
+    <Content Remove="ViewModels\Component\**" />
+    <Content Remove="ViewModels\Page\**" />
+    <EmbeddedResource Remove="ViewModels\Component\**" />
+    <EmbeddedResource Remove="ViewModels\Page\**" />
+    <None Remove="ViewModels\Component\**" />
+    <None Remove="ViewModels\Page\**" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <SupportedPlatform Include="browser" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.4" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Kayura.Db\Kayura.Db.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Models\" />
-    <Folder Include="ViewModels\Component\" />
-    <Folder Include="ViewModels\Page\" />
     <Folder Include="Views\Component\" />
-    <Folder Include="Views\Page\" />
   </ItemGroup>
 
 </Project>

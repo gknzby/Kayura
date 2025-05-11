@@ -1,4 +1,5 @@
 using Kayura.Db.Mutfak.Models;
+
 using Microsoft.Extensions.Logging;
 
 namespace Kayura.Db.Mutfak.Managers;
@@ -15,10 +16,7 @@ public class StepManager : MutfakManager<Step>
   /// <summary>
   /// Creates a new Step instance
   /// </summary>
-  public override Step Create()
-  {
-    return Create(title: string.Empty, detail: string.Empty, note: string.Empty);
-  }
+  public override Step Create() => Create(title: string.Empty, detail: string.Empty, note: string.Empty);
 
   public Step Create(string title, string detail = "", string note = "")
   {

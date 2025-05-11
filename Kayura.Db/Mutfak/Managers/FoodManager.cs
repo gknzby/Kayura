@@ -1,17 +1,14 @@
 using Kayura.Db.Mutfak.Models;
+
 using Microsoft.Extensions.Logging; // Added for ILogger
-using System; // Added for ArgumentException
 
 namespace Kayura.Db.Mutfak.Managers;
 
 /// <summary>
 /// Manager for Food entities
 /// </summary>
-public class FoodManager : MutfakManager<Food>
+public class FoodManager(LiteDb<Food> repository, ILogger<FoodManager>? logger = null) : MutfakManager<Food>(repository, logger)
 {
-  public FoodManager(LiteDb<Food> repository, ILogger<FoodManager>? logger = null) : base(repository, logger)
-  {
-  }
 
   /// <summary>
   /// Creates a new Food instance with default values.

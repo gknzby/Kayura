@@ -12,10 +12,10 @@ public class RecipeStep
   [ForeignKey("Recipe")]
   public int RecipeId { get; set; }
   [Required]
-  public required virtual Recipe Recipe { get; set; }
+  public virtual required Recipe Recipe { get; set; }
 
   [ForeignKey("Step")]
   public int StepId { get; set; }
   [Required]
-  public required virtual Step Step { get; set; }
+  public virtual required Step Step { get; set; }
 }

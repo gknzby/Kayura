@@ -1,38 +1,28 @@
 using Kayura.Db.Mutfak.Models;
+
 using Microsoft.Extensions.Logging; // Added for ILogger
-using System; // Added for ArgumentNullException
 
 namespace Kayura.Db.Mutfak.Managers;
 
 /// <summary>
 /// Manager for Recipe entities
 /// </summary>
-public class RecipeManager : MutfakManager<Recipe>
+public class RecipeManager(LiteDb<Recipe> repository, FoodManager foodManager, ILogger<RecipeManager>? logger = null) : MutfakManager<Recipe>(repository, logger)
 {
-  private readonly FoodManager _foodManager;
-
-  public RecipeManager(LiteDb<Recipe> repository, FoodManager foodManager, ILogger<RecipeManager>? logger = null) 
-      : base(repository, logger)
-  {
-    _foodManager = foodManager ?? throw new ArgumentNullException(nameof(foodManager));
-  }
+  private readonly FoodManager foodManager = foodManager ?? throw new ArgumentNullException(nameof(foodManager));
 
   /// <summary>
   /// Not recommended - use Create(Food) instead
   /// </summary>
-  public override Recipe Create()
-  {
-    throw new InvalidOperationException("Recipe must be created with a Food reference");
-  }
+  public override Recipe Create() => throw new InvalidOperationException("Recipe must be created with a Food reference");
 
   /// <summary>
   /// Creates a new Recipe instance with a reference to Food
   /// </summary>
   /// <param name="food">Required Food reference</param>
-  public Recipe Create(Food food)
+  public static Recipe Create(Food food)
   {
-    if (food == null)
-      throw new ArgumentNullException(nameof(food));
+    ArgumentNullException.ThrowIfNull(food);
 
     var recipe = new Recipe
     {

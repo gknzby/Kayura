@@ -16,7 +16,7 @@ public class Recipe
   public required int FoodId { get; set; }
 
   [Required]
-  public required virtual Food Food { get; set; }
+  public virtual required Food Food { get; set; }
 
   /// <summary>Name of the recipe.</summary>
   [Required, MaxLength(100)]
@@ -26,15 +26,15 @@ public class Recipe
   [MaxLength(2000)]
   public string Detail { get; set; } = string.Empty;
 
-  public virtual ICollection<RecipeHistory> RecipeHistories { get; set; } = new List<RecipeHistory>();
+  public virtual ICollection<RecipeHistory> RecipeHistories { get; set; } = [];
 
   [InverseProperty("BaseRecipe")]
-  public virtual ICollection<SubRecipe> BaseSubRecipes { get; set; } = new List<SubRecipe>();
+  public virtual ICollection<SubRecipe> BaseSubRecipes { get; set; } = [];
 
   [InverseProperty("SubRecipeDetail")]
-  public virtual ICollection<SubRecipe> SubRecipes { get; set; } = new List<SubRecipe>();
+  public virtual ICollection<SubRecipe> SubRecipes { get; set; } = [];
 
-  public virtual ICollection<RecipeStep> RecipeSteps { get; set; } = new List<RecipeStep>();
+  public virtual ICollection<RecipeStep> RecipeSteps { get; set; } = [];
 
-  public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
+  public virtual ICollection<Order> Orders { get; set; } = [];
 }
