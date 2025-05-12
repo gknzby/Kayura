@@ -1,0 +1,20 @@
+﻿@if(TypeOfComponent == ComponentType.None)
+{
+    <h3>None Food</h3>
+}
+@if(TypeOfComponent == ComponentType.Form)
+{
+    <h3>Form Food</h3>
+}
+@if(TypeOfComponent == ComponentType.ListItem)
+{
+    <td>List Item Food</td>
+}
+
+
+
+
+@code {
+    [Parameter]
+    public ComponentType TypeOfComponent { get; set; } = ComponentType.None;
+}

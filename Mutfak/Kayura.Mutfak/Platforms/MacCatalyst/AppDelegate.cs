@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace Kayura.Mutfak;
+namespace Kayura.Mutfak.Platforms.MacCatalyst;
 [Register("AppDelegate")]
 public class AppDelegate : MauiUIApplicationDelegate
 {
