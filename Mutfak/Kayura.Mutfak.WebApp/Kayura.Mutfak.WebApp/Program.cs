@@ -7,6 +7,8 @@ using Kayura.Mutfak.WebApp.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
+using Syncfusion.Blazor;
+
 namespace Kayura.Mutfak.WebApp;
 
 public class Program
@@ -46,7 +48,7 @@ public class Program
 
     _ = builder.Services.AddKayuraDb();
     _ = builder.Services.AddKayuraViewModels();
-
+    _ = builder.Services.AddSyncfusionBlazor();
     WebApplication app = builder.Build();
 
     // Configure the HTTP request pipeline.
