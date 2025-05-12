@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Kayura.Mutfak.UIX\Kayura.Mutfak.UIX.csproj" />
     <ProjectReference Include="..\Kayura.Mutfak.WebApp.Client\Kayura.Mutfak.WebApp.Client.csproj" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="9.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="9.0.4" />

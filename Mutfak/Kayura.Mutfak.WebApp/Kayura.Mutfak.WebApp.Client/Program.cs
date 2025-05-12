@@ -8,9 +8,9 @@ class Program
   {
     var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
-    builder.Services.AddAuthorizationCore();
-    builder.Services.AddCascadingAuthenticationState();
-    builder.Services.AddAuthenticationStateDeserialization();
+    _ = builder.Services.AddAuthorizationCore();
+    _ = builder.Services.AddCascadingAuthenticationState();
+    _ = builder.Services.AddAuthenticationStateDeserialization();
 
     await builder.Build().RunAsync();
   }

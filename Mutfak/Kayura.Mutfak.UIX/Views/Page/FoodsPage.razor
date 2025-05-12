@@ -1,6 +1,52 @@
-﻿
+﻿@page "/foods"
+
+@using Kayura.Mutfak.UIX.Views.Component
+@using Kayura.Mutfak.UIX.ViewModels
+
+@inject FoodsVM VM
+
+<PageTitle>Foods</PageTitle>
 
 <h3>FoodsPage</h3>
+<p>Search-Filter Placeholder</p>
+
+<ul>
+    @foreach (var food in VM.Foods)
+    {
+        <li>@food.Name</li>
+    }
+    @if (!VM.Foods.Any())
+    {
+        <li>No food items available</li>
+    }
+</ul>
+
+<button>Add Food</button>
+
+<table>
+    <thead>
+        <tr>
+            <th>Food Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var food in VM.Foods)
+        {
+            <tr>
+                <td>@food.Name</td>
+            </tr>
+        }
+        @if (!VM.Foods.Any())
+        {
+            <tr>
+                <td>No food items available</td>
+            </tr>
+        }
+        <tr><FoodComponent /></tr>
+        <tr><FoodComponent TypeOfComponent="@ComponentType.Form" /></tr>
+        <tr><FoodComponent TypeOfComponent="@ComponentType.ListItem" /></tr>
+    </tbody>
+</table>
 
 @code {
 
