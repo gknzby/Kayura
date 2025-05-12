@@ -2,9 +2,9 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 namespace Kayura.Mutfak.WebApp.Client;
 
-class Program
+internal class Program
 {
-  static async Task Main(string[] args)
+  private static async Task Main(string[] args)
   {
     var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
