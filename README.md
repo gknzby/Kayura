@@ -1,1 +1,3 @@
 # Kayura
+
+[Deneme](./.gitignore)
